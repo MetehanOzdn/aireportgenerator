@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiology AI Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <span class="icon">🩺</span>
+                <h1>Radiology AI Simulator</h1>
+            </div>
+
+            <!-- Tab Navigation -->
+            <nav class="tab-nav">
+                <button class="tab-btn active" data-tab="tab-simulator">Simulator</button>
+                <button class="tab-btn" data-tab="tab-gemini">Gemini</button>
+                <button class="tab-btn" data-tab="tab-batch">Batch Processing</button>
+            </nav>
+
+            <div class="api-config">
+                <div class="select-group">
+                    <select id="select-provider" class="provider-select" title="Provider">
+                        <option value="openai">OpenAI</option>
+                    </select>
+                    <select id="select-model" class="provider-select" title="Transcription Model">
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+                <input type="password" id="api-key-input" placeholder="Enter OpenAI API Key" />
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Simulator Tab -->
+            <div id="tab-simulator" class="tab-content active">
+                <section class="upload-section">
+                    <!-- Audio Upload -->
+                    <div class="drop-zone" id="drop-zone-audio" data-type="audio">
+                        <div class="icon">🎙️</div>
+                        <h3>Audio Recording</h3>
+                        <p>Drag & drop Audio (MP3, WAV, WEBM) or click to upload</p>
+                        <div class="file-info" id="file-info-audio"></div>
+                    </div>
+                    <input type="file" id="input-audio" accept="audio/*,.webm" hidden>
+
+                    <!-- Template Selection (New) -->
+                    <div class="drop-zone" id="selection-zone-template" data-type="template" style="cursor: default;">
+                        <div class="icon">📝</div>
+                        <h3>Report Template</h3>
+                        <p>Select a template from the list below</p>
+                        <select id="select-template" class="template-select">
+                            <option value="">-- Şablon Seçiniz --</option>
+                        </select>
+                        <div class="file-info" id="file-info-template"></div>
+                    </div>
+                    <!-- Hidden input kept if needed later, but mainly using select now -->
+                    <input type="file" id="input-template" accept=".txt,.md" hidden>
+
+                    <!-- Ground Truth Upload -->
+                    <div class="drop-zone" id="drop-zone-truth" data-type="truth">
+                        <div class="icon">✅</div>
+                        <h3>True Report</h3>
+                        <p>Drag & drop text/markdown or click to upload</p>
+                        <div class="file-info" id="file-info-truth"></div>
+                    </div>
+                    <input type="file" id="input-truth" accept=".txt,.md" hidden>
+                </section>
+
+                <div class="actions">
+                    <button id="btn-simulate" class="primary-btn" disabled>
+                        <span class="btn-text">Run Simulation</span>
+                        <span class="btn-loader hidden"></span>
+                    </button>
+                </div>
+
+                <section class="results-section hidden" id="results-section">
+                    <div class="result-card">
+                        <div class="card-header">
+                            <h3>Transcript (Whisper)</h3>
+                            <span class="badge">Audio to Text</span>
+                        </div>
+                        <div class="card-content" id="output-transcript">
+                            <em class="placeholder">Waiting for transcription...</em>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="card-header">
+                            <h3>AI Generated Report</h3>
+                            <span class="badge">GPT-4</span>
+                        </div>
+                        <div class="card-content" id="output-generated">
+                            <em class="placeholder">Waiting for generation...</em>
+                        </div>
+                    </div>
+
+                    <div class="result-card full-width">
+                        <div class="card-header">
+                            <h3>Comparison Analysis</h3>
+                            <div class="legend">
+                                <span class="legend-item match">Eşleşen (Yeşil)</span>
+                                <span class="legend-item missing">Eksik (Kırmızı)</span>
+                                <span class="legend-item diff" style="color: #60a5fa;">Fazla (Mavi)</span>
+                            </div>
+                        </div>
+                        <!-- Side by Side Container -->
+                        <div class="comparison-container" id="output-comparison">
+                            <em class="placeholder" style="padding: 1.5rem;">Raporlar karşılaştırılmayı bekliyor...</em>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Gemini Tab -->
+            <div id="tab-gemini" class="tab-content hidden">
+                <header class="app-header" style="margin-bottom: 2rem; background: rgba(59, 130, 246, 0.1);">
+                    <div class="logo">
+                        <span class="icon">✨</span>
+                        <h1>Google Gemini Simulator</h1>
+                    </div>
+                    <div class="api-config">
+                        <select id="gemini-model-select" class="provider-select">
+                            <option value="gemini-2.5-pro">Gemini 2.5 Pro (Experimental)</option>
+                            <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash (Experimental)</option>
+                            <option value="gemini-2.0-flash-thinking-exp-1219">Gemini 2.0 Flash Thinking</option>
+                            <option value="gemini-1.5-flash-latest">Gemini 1.5 Flash (Latest)</option>
+                            <option value="gemini-1.5-flash-002">Gemini 1.5 Flash-002</option>
+                            <option value="gemini-1.5-pro-latest">Gemini 1.5 Pro (Latest)</option>
+                            <option value="gemini-1.5-pro-002">Gemini 1.5 Pro-002</option>
+                            <option value="gemini-exp-1206">Gemini Exp 1206</option>
+                        </select>
+                        <input type="password" id="gemini-api-key" placeholder="Enter Google API Key" />
+                    </div>
+                </header>
+
+                <section class="upload-section">
+                    <!-- Gemini Audio -->
+                    <div class="drop-zone" id="gemini-drop-audio">
+                        <div class="icon">🎙️</div>
+                        <h3>Audio Recording</h3>
+                        <p>Drag & drop Audio</p>
+                        <div class="file-info" id="gemini-audio-info"></div>
+                        <audio id="gemini-audio-player" controls
+                            style="display: none; margin-top: 10px; width: 100%; max-width: 300px;"></audio>
+                    </div>
+                    <input type="file" id="gemini-audio-input" accept="audio/*,.webm" hidden>
+
+                    <!-- Gemini Template -->
+                    <div class="drop-zone" id="gemini-drop-template">
+                        <div class="icon">📝</div>
+                        <h3>Report Template</h3>
+                        <p>Select Template</p>
+                        <select id="gemini-template-select" class="template-select">
+                            <option value="">-- Şablon Seçiniz --</option>
+                        </select>
+                        <div class="file-info" id="gemini-template-info"></div>
+                    </div>
+
+                    <!-- Gemini Truth -->
+                    <div class="drop-zone" id="gemini-drop-truth">
+                        <div class="icon">✅</div>
+                        <h3>True Report</h3>
+                        <p>Drag & drop Truth File</p>
+                        <div class="file-info" id="gemini-truth-info"></div>
+                    </div>
+                    <input type="file" id="gemini-truth-input" accept=".txt,.md" hidden>
+                </section>
+
+                <div class="actions">
+                    <button id="gemini-run-btn" class="primary-btn" disabled>Simülasyonu Başlat (Gemini)</button>
+                </div>
+
+                <section class="results-section hidden" id="gemini-results-section">
+                    <div class="result-card">
+                        <div class="card-header">
+                            <h3>Transcript (Implicit)</h3>
+                        </div>
+                        <div class="card-content" id="gemini-output-transcript"></div>
+                    </div>
+                    <div class="result-card">
+                        <div class="card-header">
+                            <h3>Gemini Generated Report</h3>
+                        </div>
+                        <div class="card-content" id="gemini-output-report"></div>
+                    </div>
+                    <div class="result-card full-width">
+                        <div class="card-header">
+                            <h3>Comparison</h3>
+                        </div>
+                        <div class="comparison-container" id="gemini-output-comparison"></div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Batch Processing Tab Content (Outside Main or Inside depending on structure, let's keep inside main) -->
+        <!-- Actually structure is main -> tab-content. So insert before closing main -->
+
+        <!-- Batch Processing Tab -->
+        <div id="tab-batch" class="tab-content hidden">
+            <header class="app-header" style="margin-bottom: 2rem; background: rgba(16, 185, 129, 0.1);">
+                <div class="logo">
+                    <span class="icon">📂</span>
+                    <h1>Batch Processing</h1>
+                </div>
+                <div class="batch-controls">
+                    <div class="file-input-wrapper">
+                        <label for="batch-folder-input" class="primary-btn">Select Folder</label>
+                        <input type="file" id="batch-folder-input" webkitdirectory directory multiple hidden>
+                    </div>
+                    <span id="batch-folder-name" class="folder-name-display">No folder selected</span>
+                </div>
+            </header>
+
+            <div class="batch-container">
+                <table class="batch-table" id="batch-table">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Case Name</th>
+                            <th>Audio</th>
+                            <th>Template</th>
+                            <th>Truth</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="batch-list-body">
+                        <!-- Rows will be populated by JS -->
+                        <tr class="empty-row">
+                            <td colspan="6">Please select a folder to load cases.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Batch Details Modal (Hidden by default) -->
+            <div id="batch-details-modal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Case Details</h2>
+                    <div id="batch-modal-content"></div>
+                </div>
+            </div>
+        </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/templates.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/gemini_tab.js"></script>
+    <script src="js/batch_tab.js"></script>
+</body>
+
+</html>

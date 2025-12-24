@@ -1,0 +1,37 @@
+{patient_name}
+
+{patient_id}
+
+{birth_date}
+
+{study_date}
+
+Teknik: 
+
+KONTRASTSIZ TORAKS BİLGİSAYARLI TOMOGRAFİ (BT) İNCELEME
+
+Karşılaştırma: 
+
+Bulgular: 
+
+Mediastinal ana vasküler yapılar ve kalp konfigürasyonu normaldir.
+
+Trakea orta hattadır. Trakea ve her iki ana bronş açıktır.
+
+Mediastinal ya da hiler yerleşimli patolojik boyut artışı gösteren lenf nodu izlenmemiştir.
+
+Her iki akciğer parankiminde aktif infiltrasyon ya da kitle imajı izlenmemiştir.
+
+Plevral kalsifikasyon, kalınlaşma veya effüzyon izlenmemiştir.
+
+Kemik yapılar doğal görünümdedir.
+
+Sonuç:
+
+Olguya ait patolojiler 'Bulgular' kısmında belirtilmiş olup klinik, fizik muayene ve laboratuvar verileri ile birlikte korelasyonu ve ileri evalüasyonu önerilir.
+
+Değerlendirme: 44
+
+{approved_user}
+Diploma No: {diploma_no}
+Tescil No: {registration_no}

@@ -1,0 +1,37 @@
+{patient_name}
+
+{patient_id}
+
+{birth_date}
+
+{study_date}
+
+Teknik:
+
+ACİL KONTRASTSIZ TORAKS BİLGİSAYARLI TOMOGRAFİ (BT) İNCELEME
+
+Karşılaştırma: 
+
+Bulgular: 
+
+Hemotoraks lehine bulgu saptanmadı.
+
+Pnömotoraks gözlenmedi.
+
+Her iki akciğerde acil şartlarda değerlendirmede major patoloji saptanmamıştır.
+
+Plevral effüzyon izlenmedi .
+
+Sonuç:
+
+Olguya ait patolojiler 'Bulgular' kısmında belirtilmiş olup klinik, fizik muayene ve laboratuvar verileri ile birlikte korelasyonu ve ileri evalüasyonu önerilir.
+
+ 
+Not; İnceleme acil istek üzerine ,verilen klinik bilgi  doğrultusunda raporlanmıştır. Klinik bulgular ve Radyolojik raporun uyuşmazlık durumunda tekrar değerlendirme yapılacaktır. 
+ 
+Değerlendirme: 44
+ 
+
+{approved_user}
+Diploma No: {diploma_no}
+Tescil No: {registration_no}

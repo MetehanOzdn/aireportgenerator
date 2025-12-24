@@ -1,0 +1,81 @@
+# Proje Tanıtım Dosyası
+
+### 1. Proje Konusu
+**Yapay Zeka Destekli Radyoloji Raporlama ve Doğrulama Simülasyonu**
+
+Projenin temel konusu, radyoloji uzmanlarının inceleme süreçlerinde (MR, BT vb.) gerçekleştirdikleri sesli dikte işleminin, Yapay Zeka (AI) teknolojileri kullanılarak otomatik, hızlı ve standartlara uygun tıbbi raporlara dönüştürülmesidir. Ayrıca, AI tarafından üretilen bu raporların, uzman hekim tarafından onaylanmış "referans" raporlarla kıyaslanarak doğruluk oranının ölçülmesi ve bir simülasyon ortamında görselleştirilmesi projenin ana odağını oluşturur.
+
+### 2. Ar-Ge Niteliği
+Proje, standart bir yazılım geliştirme sürecinin ötesinde, Büyük Dil Modellerinin (LLM) spesifik bir tıbbi alana (Radyoloji) adaptasyonu konusunda araştırma ve geliştirme faaliyeti içerir.
+*   **Doğal Dil İşleme (NLP):** Radyolojik terimlerin ve karmaşık cümle yapılarının, ses verisinden (Speech-to-Text) hatasız dökümü ve bu dağınık metnin yapılandırılmış bir formata (Structured Reporting) dönüştürülmesi.
+*   **Prompt Mühendisliği:** Tıbbi şablonlara sadık kalarak, halüsinasyon (uydurma bilgi) üretmeden sadece verilen bulguları rapora işleyen optimize edilmiş model istemlerinin geliştirilmesi.
+*   **Doğrulama Algoritmaları:** Üretilen raporun "Altın Standart" (Ground Truth) ile kelime ve anlamsal bazda kıyaslanmasını sağlayan, eksik/fazla bilgiyi ayırt edebilen algoritmaların web tabanlı bir arayüzde görselleştirilmesi.
+
+### 3. Proje Detayı
+Sistem, kullanıcı dostu ve modern bir web arayüzü üzerinden çalışmaktadır. Süreç şu adımlardan oluşur:
+1.  **Girdi Yönetimi:** Kullanıcı, radyoloji diktesini içeren ses dosyasını (`.mp3`, `.webm` vb.) ve kullanmak istediği rapor şablonunu (Örn: Acil Beyin BT, Toraks BT) sisteme yükler.
+2.  **Transkripsiyon (Whisper):** Ses dosyası, Whisper modeli ile yüksek doğrulukla ham metne dönüştürülür.
+3.  **Akıllı Raporlama (GPT-4o):** Ham metin ve seçilen şablon, LLM motoruna gönderilir. Model, dağınık konuşma metnini analiz ederek şablondaki ilgili alanları (Bulgular, Sonuç vb.) doldurur.
+4.  **Karşılaştırmalı Analiz:** AI tarafından üretilen rapor, sisteme yüklenen "Gerçek Rapor" ile kıyaslanır. Renk kodlu bir arayüzde (Yeşil: Eşleşen, Kırmızı: Eksik, Mavi: Fazla) farklılıklar sunulur.
+5.  **Teknoloji Yığını:** Proje, istemci taraflı (Client-Side) mimaride; HTML5, CSS3 (Glassmorphism), JavaScript (ES6+), OpenAI API ve Diff-Match-Patch kütüphaneleri kullanılarak geliştirilmiştir.
+
+### 4. Hedeflenen Kazanımlar ve Sonuçlar
+*   **Verimlilik Artışı:** Radyologların rapor yazma süresini minimize ederek, hasta başına düşen inceleme süresini optimize etmek.
+*   **Standardizasyon:** Kişisel ifade farklılıklarından kaynaklanan karışıklıkları önleyerek, kurum genelinde standart ve yapılandırılmış rapor formatı oluşturmak.
+*   **Eğitim ve Geri Bildirim:** Asistan doktorlar için kendi raporlarını AI veya uzman raporlarıyla kıyaslayabilecekleri bir eğitim simülasyonu sağlamak.
+*   **Hata Önleme:** Dikte sırasındaki olası dil sürçmelerini veya eksiklikleri, yapılandırılmış şablon desteği ile minimize etmek.
+
+### 5. Ticarileşme Potansiyeli
+Proje, sağlık teknolojileri pazarında yüksek bir potansiyele sahiptir:
+*   **HBYS/PACS Entegrasyonu:** Hastanelerin mevcut görüntüleme ve bilgi sistemlerine entegre çalışan bir eklenti modülü olarak pazarlanabilir.
+*   **SaaS Modeli:** Radyoloji görüntüleme merkezlerine abonelik bazlı bulut hizmeti olarak sunulabilir.
+*   **Eğitim Kurumları:** Tıp fakülteleri ve eğitim araştırma hastanelerinde asistan eğitimi için lisanslanabilir.
+
+### 6. Yenilikçi Yönü
+*   **Hibrit Doğrulama:** Raporu sadece oluşturmakla kalmayıp, anlık olarak doğruluk analizi sunan "İnsan Döngüde (Human-in-the-loop)" yaklaşımı.
+*   **Dinamik Şablonlama:** Statik metin üretimi yerine, kurumun veya doktorun kendi şablonlarına (dynamic templating) uyum sağlayan esnek AI altyapısı.
+*   **Görsel Farkındalık (Visual Diff):** Metin tabanlı raporların kıyaslanmasında yazılımcıların kullandığı "Code Diff" mantığını tıbbi raporlara uyarlayarak, gözden kaçabilecek detayları saniyeler içinde görünür kılması.
+
+
+
+
+
+
+
+# Proje Tanıtım Dosyası
+
+### 1. Proje Konusu
+**Yapay Zeka Destekli Radyoloji Raporlama ve Doğrulama Simülasyonu**
+
+Projenin temel konusu, radyoloji uzmanlarının inceleme süreçlerinde (MR, BT vb.) gerçekleştirdikleri sesli dikte işleminin, Yapay Zeka (AI) teknolojileri kullanılarak otomatik, hızlı ve standartlara uygun tıbbi raporlara dönüştürülmesidir. Ayrıca, AI tarafından üretilen bu raporların, uzman hekim tarafından onaylanmış "referans" raporlarla kıyaslanarak doğruluk oranının ölçülmesi ve bir simülasyon ortamında görselleştirilmesi projenin ana odağını oluşturur.
+
+### 2. Ar-Ge Niteliği
+Proje, standart bir yazılım geliştirme sürecinin ötesinde, Büyük Dil Modellerinin (LLM) spesifik bir tıbbi alana (Radyoloji) adaptasyonu konusunda araştırma ve geliştirme faaliyeti içerir.
+*   **Doğal Dil İşleme (NLP):** Radyolojik terimlerin ve karmaşık cümle yapılarının, ses verisinden (Speech-to-Text) hatasız dökümü ve bu dağınık metnin yapılandırılmış bir formata (Structured Reporting) dönüştürülmesi.
+*   **Prompt Mühendisliği:** Tıbbi şablonlara sadık kalarak, halüsinasyon (uydurma bilgi) üretmeden sadece verilen bulguları rapora işleyen optimize edilmiş model istemlerinin geliştirilmesi.
+*   **Doğrulama Algoritmaları:** Üretilen raporun "Altın Standart" (Ground Truth) ile kelime ve anlamsal bazda kıyaslanmasını sağlayan, eksik/fazla bilgiyi ayırt edebilen algoritmaların web tabanlı bir arayüzde görselleştirilmesi.
+
+### 3. Proje Detayı
+Sistem, kullanıcı dostu ve modern bir web arayüzü üzerinden çalışmaktadır. Süreç şu adımlardan oluşur:
+1.  **Girdi Yönetimi:** Kullanıcı, radyoloji diktesini içeren ses dosyasını (`.mp3`, `.webm` vb.) ve kullanmak istediği rapor şablonunu (Örn: Acil Beyin BT, Toraks BT) sisteme yükler.
+2.  **Transkripsiyon (Whisper):** Ses dosyası, Whisper modeli ile yüksek doğrulukla ham metne dönüştürülür.
+3.  **Akıllı Raporlama (GPT-4o):** Ham metin ve seçilen şablon, LLM motoruna gönderilir. Model, dağınık konuşma metnini analiz ederek şablondaki ilgili alanları (Bulgular, Sonuç vb.) doldurur.
+4.  **Karşılaştırmalı Analiz:** AI tarafından üretilen rapor, sisteme yüklenen "Gerçek Rapor" ile kıyaslanır. Renk kodlu bir arayüzde (Yeşil: Eşleşen, Kırmızı: Eksik, Mavi: Fazla) farklılıklar sunulur.
+5.  **Teknoloji Yığını:** Proje, istemci taraflı (Client-Side) mimaride; HTML5, CSS3 (Glassmorphism), JavaScript (ES6+), OpenAI API ve Diff-Match-Patch kütüphaneleri kullanılarak geliştirilmiştir.
+
+### 4. Hedeflenen Kazanımlar ve Sonuçlar
+*   **Verimlilik Artışı:** Radyologların rapor yazma süresini minimize ederek, hasta başına düşen inceleme süresini optimize etmek.
+*   **Standardizasyon:** Kişisel ifade farklılıklarından kaynaklanan karışıklıkları önleyerek, kurum genelinde standart ve yapılandırılmış rapor formatı oluşturmak.
+*   **Eğitim ve Geri Bildirim:** Asistan doktorlar için kendi raporlarını AI veya uzman raporlarıyla kıyaslayabilecekleri bir eğitim simülasyonu sağlamak.
+*   **Hata Önleme:** Dikte sırasındaki olası dil sürçmelerini veya eksiklikleri, yapılandırılmış şablon desteği ile minimize etmek.
+
+### 5. Ticarileşme Potansiyeli
+Proje, sağlık teknolojileri pazarında yüksek bir potansiyele sahiptir:
+*   **HBYS/PACS Entegrasyonu:** Hastanelerin mevcut görüntüleme ve bilgi sistemlerine entegre çalışan bir eklenti modülü olarak pazarlanabilir.
+*   **SaaS Modeli:** Radyoloji görüntüleme merkezlerine abonelik bazlı bulut hizmeti olarak sunulabilir.
+*   **Eğitim Kurumları:** Tıp fakülteleri ve eğitim araştırma hastanelerinde asistan eğitimi için lisanslanabilir.
+
+### 6. Yenilikçi Yönü
+*   **Hibrit Doğrulama:** Raporu sadece oluşturmakla kalmayıp, anlık olarak doğruluk analizi sunan "İnsan Döngüde (Human-in-the-loop)" yaklaşımı.
+*   **Dinamik Şablonlama:** Statik metin üretimi yerine, kurumun veya doktorun kendi şablonlarına (dynamic templating) uyum sağlayan esnek AI altyapısı.
+*   **Görsel Farkındalık (Visual Diff):** Metin tabanlı raporların kıyaslanmasında yazılımcıların kullandığı "Code Diff" mantığını tıbbi raporlara uyarlayarak, gözden kaçabilecek detayları saniyeler içinde görünür kılması.

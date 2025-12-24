@@ -1,0 +1,53 @@
+{patient_name}
+
+{patient_id}
+
+{birth_date}
+
+{study_date}
+
+Teknik: 
+
+ACİL KONTRASTSIZ BEYİN BT İNCELEMESİ
+
+
+Karşılaştırma:
+
+
+Bulgular: 
+
+ 
+
+Supratentoriyal orta hat oluşumları normal şekil ve lokalizasyondadır
+
+Periventriküler derin beyaz cevherde kronik iskemik değişiklikler izlenmiştir.
+
+Serebral sulkusların derinlik ve genişlikleri serebral atrofi ile uyumlu şekilde artmıştır.
+
+İntrakranial kanama izlenmedi.
+
+Sella ve orbitada makropatoloji görülmemektedir.
+                     
+
+Sonuç:
+
+Olguya ait patolojiler 'Bulgular' kısmında belirtilmiş olup klinik, fizik muayene ve laboratuvar verileri ile birlikte korelasyonu ve ileri evalüasyonu önerilir.
+
+ 
+
+Not: İnceleme acil istek üzerine ,verilen klinik bilgi  doğrultusunda raporlanmıştır. Klinik bulgular ve Radyolojik raporun uyuşmazlık durumunda tekrar değerlendirme yapılacaktır. 
+
+ 
+
+Değerlendirme: 44
+
+ 
+
+
+                                                                                                                                                                 
+
+{approved_user}
+Diploma No: {diploma_no}
+Tescil No: {registration_no}
+
+ 
